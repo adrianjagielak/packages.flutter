@@ -112,6 +112,17 @@ class PdfView extends StatefulWidget {
         minScale: PhotoViewComputedScale.contained * 1,
         maxScale: PhotoViewComputedScale.contained * 3.0,
         initialScale: PhotoViewComputedScale.contained * 1.0,
+        // Changes the default double-tap behavior from
+        // initial -> covering -> original size -> initial
+        // to initial -> covering -> initial.
+        scaleStateCycle: (PhotoViewScaleState actual) {
+          switch (actual) {
+            case PhotoViewScaleState.initial:
+              return PhotoViewScaleState.originalSize;
+            default:
+              return PhotoViewScaleState.initial;
+          }
+        },
         heroAttributes: PhotoViewHeroAttributes(tag: '${document.id}-$index'),
       );
 
