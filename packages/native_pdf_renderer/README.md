@@ -14,11 +14,14 @@ dependencies:
   native_pdf_renderer: any
 ```
 
-For web add lines in index.html before importing main.dart.js:
+For web add lines in index.html before importing main.dart.js:<br/>
+**note that the files have different names**
 ```html
-<script src="//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.min.js"></script>
+<!-- Link to pdf.js library -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.min.js"></script>
 <script type="text/javascript">
-  pdfjsLib.GlobalWorkerOptions.workerSrc = "//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.4.456/pdf.worker.min.js";
+  // Link to worker for pdf.js library
+  pdfjsLib.GlobalWorkerOptions.workerSrc = "//cdnjs.cloudflare.com/ajax/libs/pdf.js/2.7.570/pdf.worker.min.js";
 </script>
 ```
 
@@ -132,10 +135,6 @@ final pageImage = page.render(
 | bytes      | Rendered image result, Uint8List                                                   | -                 |
 | format     | Rendered image compression format, for web always PNG                              | PdfPageFormat.PNG |
 
-```dart
-
-```
-
 **Close page:**
 <br>
 Before open new page android asks to close the past. <br>
@@ -159,3 +158,8 @@ This plugin uses the IOS native [CGPDFPage](https://developer.apple.com/document
 
 ### On Windows
 This plugin use [PDFium](https://pdfium.googlesource.com/pdfium/+/master/README.md)
+
+The pdfium version used can be overridden by the base flutter application by adding the following line to the host apps CMakeLists.txt file:
+```
+set(PDFIUM_VERSION "4638" CACHE STRING "")
+```
